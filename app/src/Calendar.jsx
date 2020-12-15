@@ -29,6 +29,11 @@ class Calendar extends Component {
           .subtract(1, "months")
           .format("MM"),
       });
+    } else if (move === "today") {
+      this.setState({
+        viewYear: moment().format("YYYY"),
+        viewMonth: moment().format("MM"),
+      });
     }
   };
 
@@ -59,6 +64,9 @@ class Calendar extends Component {
             PREVIOUS
           </button>
           {monthsNamed[viewMonth - 1] + " " + viewYear}
+          <button id="today" onClick={() => this.handleClick("today")}>
+            TODAY
+          </button>
           <button id="next-month" onClick={() => this.handleClick("next")}>
             NEXT
           </button>

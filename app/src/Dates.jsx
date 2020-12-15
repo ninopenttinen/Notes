@@ -1,14 +1,22 @@
 import React, { Component } from "react";
 import moment from "moment";
+import Event from "./Events";
 
 class Dates extends Component {
   state = {
     today: moment().format("DD-MM-YYYY"),
+    selectedDate: null,
     writingNote: false,
   };
 
   handleClick = (startDate, date) => {
-    console.log(moment(startDate).add(date, "days").calendar());
+    let setDate = moment(startDate).add(date, "days").format("DD.MM.YYYY");
+    this.setState({ writingNote: true, selectedDate: setDate });
+    console.log(setDate);
+  };
+
+  closeEvent = () => {
+    this.setState({ writingNote: false });
   };
 
   printWeekday = (date) => {
@@ -65,7 +73,14 @@ class Dates extends Component {
             ))}
           </div>
         ))}
-        {this.state.writingNote ? <div></div> : null}
+        {this.state.writingNote ? (
+          <div id="event-background" onClick={this.closeEvent}>
+            <Event
+              date={this.state.selectedDate}
+              closeEvent={this.closeEvent}
+            />
+          </div>
+        ) : null}
       </React.Fragment>
     );
   }

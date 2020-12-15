@@ -1,0 +1,11 @@
+.date {
+  font-family: Helvetica-Neue-Light;
+  padding: 1%;
+  cursor: pointer;
+}
+.date:hover {
+  background-color: #dddddd;
+}
+.date:active {
+  background-color: #cccccc;
+}

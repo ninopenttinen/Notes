@@ -1,0 +1,31 @@
+{
+  "events": [
+    {
+      "title": "Doctor",
+      "description": "Lab results",
+      "date": "2020-12-01",
+      "time": "12:00"
+    },
+    {
+      "title": "Take the day off",
+      "description": "",
+      "date": "2020-12-18",
+      "time": "",
+      "id": "3dVbScT"
+    },
+    {
+      "title": "hoo moilanen",
+      "description": "",
+      "date": "2020-12-18",
+      "time": "",
+      "id": "RejM1P_"
+    },
+    {
+      "title": "moo hoilanen",
+      "description": "",
+      "date": "2020-01-01",
+      "time": "",
+      "id": "vAK0Pq9"
+    }
+  ]
+}

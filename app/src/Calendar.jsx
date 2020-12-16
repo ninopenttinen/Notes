@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { IoArrowBackOutline, IoArrowForwardOutline } from "react-icons/io5";
 import Dates from "./Dates";
 import moment from "moment";
 
@@ -55,27 +56,29 @@ class Calendar extends Component {
     ];
 
     return (
-      <React.Fragment>
-        <header style={{ border: "1px solid black" }}>
+      <div id="calendar-container">
+        <div id="image-container"></div>
+        <header>
           <button
             id="previous-month"
             onClick={() => this.handleClick("previous")}
           >
-            PREVIOUS
+            <IoArrowBackOutline size={20} color={"#646464"} />
           </button>
-          {monthsNamed[viewMonth - 1] + " " + viewYear}
+          <b id="month">{monthsNamed[viewMonth - 1] + " " + viewYear}</b>
           <button id="today" onClick={() => this.handleClick("today")}>
             TODAY
           </button>
           <button id="next-month" onClick={() => this.handleClick("next")}>
-            NEXT
+            <IoArrowForwardOutline size={20} color={"#646464"} />
           </button>
         </header>
-        <div id="image-container"></div>
-        <div id="dates-container">
-          <Dates month={viewMonth} year={viewYear} />
-        </div>
-      </React.Fragment>
+        <Dates
+          month={viewMonth}
+          year={viewYear}
+          changeMonth={this.handleClick}
+        />
+      </div>
     );
   }
 }

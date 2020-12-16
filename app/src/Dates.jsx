@@ -1,16 +1,17 @@
 import React, { Component } from "react";
 import moment from "moment";
-import Event from "./Events";
+import Event from "./Event";
 
 class Dates extends Component {
   state = {
-    today: moment().format("DD-MM-YYYY"),
+    today: moment().format("YYYY-MM-DD"),
     selectedDate: null,
     writingNote: false,
+    events: {},
   };
 
   handleClick = (startDate, date) => {
-    let setDate = moment(startDate).add(date, "days").format("DD.MM.YYYY");
+    let setDate = moment(startDate).add(date, "days").format("YYYY-MM-DD");
     this.setState({ writingNote: true, selectedDate: setDate });
     console.log(setDate);
   };
@@ -20,8 +21,7 @@ class Dates extends Component {
   };
 
   printWeekday = (date) => {
-    let print = moment(date).format("dddd");
-    return print;
+    return moment(date).format("dddd");
   };
 
   render() {
@@ -43,32 +43,47 @@ class Dates extends Component {
       startDate = moment(startDate).subtract(1, "days");
 
     return (
-      <React.Fragment>
+      <div id="dates-container">
         {[...Array(7)].map((x, day) => (
-          <div key={day} className="day">
-            <div>
+          <div key={day} className="weekdays">
+            <div className="day-names">
               <b>{weekdays[day]}</b>
             </div>
             {[...Array(6)].map((x, week) => (
               <div
                 key={week + day}
-                className="date"
-                style={
+                className={
                   moment(startDate)
                     .add(7 * week + day, "days")
-                    .format("DD-MM-YYYY") === this.state.today
-                    ? { border: "1px solid black", background: "lightblue" }
+                    .format("YYYY-MM-DD") === this.state.today
+                    ? "date-today"
                     : moment(startDate)
                         .add(7 * week + day, "days")
                         .format("MM") !== this.props.month
-                    ? { border: "1px solid black", background: "gray" }
-                    : { border: "1px solid black" }
+                    ? "date-different-month"
+                    : "date"
                 }
-                onClick={() => this.handleClick(startDate, 7 * week + day)}
+                onClick={
+                  moment(startDate)
+                    .add(7 * week + day, "days")
+                    .format("YYYY-MM-DD") === this.state.today
+                    ? () => this.handleClick(startDate, 7 * week + day)
+                    : moment(startDate)
+                        .add(7 * week + day, "days")
+                        .format("YYYYMM") <
+                      this.props.year + this.props.month
+                    ? () => this.props.changeMonth("previous")
+                    : moment(startDate)
+                        .add(7 * week + day, "days")
+                        .format("YYYYMM") >
+                      this.props.year + this.props.month
+                    ? () => this.props.changeMonth("next")
+                    : () => this.handleClick(startDate, 7 * week + day)
+                }
               >
                 {moment(startDate)
                   .add(7 * week + day, "days")
-                  .format("D.M.Y")}
+                  .format("D")}
               </div>
             ))}
           </div>
@@ -81,7 +96,7 @@ class Dates extends Component {
             />
           </div>
         ) : null}
-      </React.Fragment>
+      </div>
     );
   }
 }

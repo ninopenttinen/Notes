@@ -9,7 +9,10 @@
   src: url("../fonts/HelveticaNeueCyr-Light.woff") format("woff2");
 }
 
-body {
+body,
+html {
+  height: 100%;
+  width: 100%;
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
     "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
@@ -32,9 +35,20 @@ body {
   border-radius: 10px;
 }
 
-header {
-  user-select: none;
-  display: flex;
+#layout {
+  height: 100%;
+  width: 100%;
+  display: grid;
+  grid-template-columns: auto 60vw auto;
+}
+
+.sidebar {
+  z-index: -1;
+  background: linear-gradient(
+    0deg,
+    rgba(235, 235, 235, 1) 0%,
+    rgba(250, 250, 250, 1) 89%
+  );
 }
 
 div {

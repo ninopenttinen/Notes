@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { IoCloseOutline } from "react-icons/io5";
 import EventService from "./EventService";
 import moment from "moment";
 
@@ -17,7 +18,11 @@ const EventForm = (props) => {
       </div>
       <div className="form-input-text">
         <label htmlFor="form-description">Description&nbsp;</label>
-        <input id="form-description" value={props.event} onChange={props.hec} />
+        <input
+          id="form-description"
+          value={props.description}
+          onChange={props.hec}
+        />
       </div>
       <div className="form-input-text">
         <label htmlFor="form-time">Time&nbsp;</label>
@@ -43,20 +48,30 @@ const EventForm = (props) => {
 
 // This component handles listing all the events for the selected date in the calendar
 const EventList = (props) => {
+  console.log("rendered EventList");
   return (
     <div id="event-list">
-      <b>{moment(props.currentDate).format("LL")}</b>
+      <div id="event-date">
+        <b>{moment(props.currentDate).format("LL")}</b>
+      </div>
+      {props.events.length === 0 ? <p>No events</p> : null}
       {props.events.map((event) =>
         moment(event.date).format("YYYY-MM-DD") === props.currentDate ? (
-          <div className="event">
-            <p key={event.id}>
-              <b>{event.time}</b>&nbsp;
-              {event.title} <br />
-              <button onClick={props.removeEvent} value={event.id}>
-                delete
+          <div key={event.id} className="event">
+            <span>
+              <p>
+                {event.time !== "" ? (
+                  <b>{event.time}&nbsp;</b>
+                ) : (
+                  <b>All day&nbsp;</b>
+                )}
+                {event.title}
+              </p>
+              <button value={event.id} onClick={(e) => props.removeEvent(e)}>
+                <IoCloseOutline size={18} />
               </button>
-            </p>
-            {event.description} <br />
+            </span>
+            {event.description !== "" ? <p>"{event.description}"</p> : null}
           </div>
         ) : null
       )}
@@ -72,9 +87,11 @@ const Event = (props) => {
   const [newTime, setNewTime] = useState("");
   const [newImportance, setNewImportance] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
+
   const handleTitleChange = (event) => {
     setNewTitle(event.target.value);
   };
+
   const handleEventChange = (event) => {
     setNewEvent(event.target.value);
   };
@@ -85,16 +102,12 @@ const Event = (props) => {
 
   const handleImportanceChange = (event) => {
     setNewImportance(event.target.checked);
-    console.log(event.target.checked);
   };
 
   // React effects and hooks are used to fetch data with axios from the JSON-server
   const hook = () => {
     EventService.getByDate(props.date).then((response) => {
       setEvents(response.data);
-      if (response.status === 200) {
-        // console.log("get successful");
-      }
     });
   };
 
@@ -103,7 +116,7 @@ const Event = (props) => {
   // This function handles adding a new event and pushing it to the JSON-server
   const addEvent = (event) => {
     event.preventDefault();
-    console.log(props.date);
+
     const EventObject = {
       title: newTitle,
       description: newEvent,
@@ -115,8 +128,12 @@ const Event = (props) => {
 
     EventService.create(EventObject)
       .then((returnedEvent) => {
+        props.updateComponent();
         setEvents(events.concat(returnedEvent));
         setNewTitle("");
+        setNewEvent("");
+        setNewTime("");
+        hook();
       })
       .catch((error) => {
         setErrorMessage(error);
@@ -125,12 +142,20 @@ const Event = (props) => {
         }, 5000);
       });
   };
+
   // This function handles removing an existing event from the json-server
   const removeEvent = (event) => {
-    const id = event.target.value;
-    EventService.remove(id);
+    EventService.remove(event.currentTarget.value)
+      .then(() => {
+        props.updateComponent();
+        hook();
+      })
+      .catch((error) => {
+        console.log(error);
+      });
   };
 
+  console.log("rendered Event");
   // Here we render everything that would be displayed inside the modal that pops up when a date is clicked in the calendar
   return (
     <div

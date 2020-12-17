@@ -1,7 +1,7 @@
-- dropdown menu
 - eventtien muokkaus
 - eventtien näyttäminen kalenterissa
-- eventtien muotoilu
 - eventtien automaattinen poistuminen ja lisääntyminen
-- eventeille väri?
-- kuvan lisääminen
+
+- eventtien muotoilu
+- important eventit päällimmäisiks, ja ajan eteen "!" tai fonttii isommaks tms.
+- kun lisää eventin niin tyhjennä tekstikenttä

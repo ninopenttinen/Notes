@@ -16,7 +16,18 @@ class Dates extends Component {
       .then((res) => {
         if (res.status === 200) {
           this.setState({ events: res.data });
-          console.log(res.data);
+        }
+      })
+      .catch((res) => {
+        console.log(res.error);
+      });
+  };
+
+  reloadEvents = () => {
+    EventService.getAll()
+      .then((res) => {
+        if (res.status === 200) {
+          this.setState({ events: res.data });
         }
       })
       .catch((res) => {
@@ -41,6 +52,8 @@ class Dates extends Component {
     let startDate = moment().format(
       this.props.month + "-01-" + this.props.year
     );
+
+    console.log("rendered Dates");
 
     const weekdays = [
       "Monday",
@@ -110,8 +123,8 @@ class Dates extends Component {
         {this.state.writingNote ? (
           <div id="event-background" onClick={this.closeEvent}>
             <Event
+              updateComponent={this.reloadEvents}
               date={this.state.selectedDate}
-              closeEvent={this.closeEvent}
             />
           </div>
         ) : null}
@@ -128,8 +141,8 @@ const ShowEvents = ({ date1, events }) => {
 
   if (showEvents.length === 0) return null;
   else
-    return showEvents.map((event) => (
-      <p className="calendar-event">
+    return showEvents.map((event, i) => (
+      <p key={i} className="calendar-event">
         <b>{event.time}</b> {event.title}
       </p>
     ));

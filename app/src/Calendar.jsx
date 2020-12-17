@@ -1,7 +1,7 @@
 import React, { Component, useEffect, useState } from "react";
 import { IoArrowBackOutline, IoArrowForwardOutline } from "react-icons/io5";
 import Dates from "./Dates";
-import Header from "./Header";
+import DropdownMenu from "./DropdownMenu";
 import moment from "moment";
 import ImageJanuary from "./images/January.jpg";
 import ImageDecember from "./images/December.jpg";
@@ -33,15 +33,17 @@ class Calendar extends Component {
           .subtract(1, "months")
           .format("MM"),
       });
-    } else if (move === "today") {
+    }
+  };
+
+  selectFromDropDown = (move) => {
+    if (move === "today")
       this.setState({
         viewYear: moment().format("YYYY"),
         viewMonth: moment().format("MM"),
       });
-    }
+    else this.setState({ viewMonth: move });
   };
-
-  selectFromDropDown = () => {};
 
   render() {
     const { viewYear, viewMonth } = this.state;
@@ -59,8 +61,8 @@ class Calendar extends Component {
       "November",
       "December",
     ];
-    console.log("rerendered");
 
+    console.log("rendered Calendar");
     return (
       <div id="calendar-container">
         <header>
@@ -70,9 +72,10 @@ class Calendar extends Component {
               <Clock />
             </b>
           </div>
-          <button id="today" onClick={() => this.handleClick("today")}>
-            TODAY
-          </button>
+          <DropdownMenu
+            selectFromDropDown={this.selectFromDropDown}
+            monthsNamed={monthsNamed}
+          />
         </header>
         <div id="image-container">
           <MonthImage month={viewMonth} />
@@ -100,7 +103,11 @@ class Calendar extends Component {
 }
 
 export default Calendar;
-
+/*
+<button id="today" onClick={() => this.handleClick("today")}>
+TODAY
+</button>
+*/
 const MonthImage = ({ month }) => {
   switch (month) {
     case "01":

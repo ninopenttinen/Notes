@@ -66,6 +66,7 @@
 }
 .event > p {
   margin: 2%;
+  font-size: 90%;
   font-style: italic;
   word-break: break-all;
 }

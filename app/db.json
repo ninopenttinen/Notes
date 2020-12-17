@@ -1,3 +1,28 @@
 {
-  "events": []
+  "events": [
+    {
+      "title": "Aamupuuro",
+      "description": "perkele",
+      "date": "2020-12-24",
+      "time": "5.30",
+      "importance": "",
+      "id": 1
+    },
+    {
+      "title": "Joulukirkko",
+      "description": "voe helevetti",
+      "date": "2020-12-24",
+      "time": "7.00",
+      "importance": "",
+      "id": 2
+    },
+    {
+      "title": "Jouluaatto",
+      "description": "",
+      "date": "2020-12-24",
+      "time": "",
+      "importance": "",
+      "id": 3
+    }
+  ]
 }

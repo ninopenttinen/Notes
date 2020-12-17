@@ -1,19 +1,32 @@
 import React, { Component } from "react";
-import moment from "moment";
+import EventService from "./EventService";
 import Event from "./Event";
+import moment from "moment";
 
 class Dates extends Component {
   state = {
     today: moment().format("YYYY-MM-DD"),
+    events: [],
     selectedDate: null,
     writingNote: false,
-    events: {},
+  };
+
+  componentDidMount = () => {
+    EventService.getAll()
+      .then((res) => {
+        if (res.status === 200) {
+          this.setState({ events: res.data });
+          console.log(res.data);
+        }
+      })
+      .catch((res) => {
+        console.log(res.error);
+      });
   };
 
   handleClick = (startDate, date) => {
     let setDate = moment(startDate).add(date, "days").format("YYYY-MM-DD");
     this.setState({ writingNote: true, selectedDate: setDate });
-    console.log(setDate);
   };
 
   closeEvent = () => {
@@ -84,6 +97,12 @@ class Dates extends Component {
                 {moment(startDate)
                   .add(7 * week + day, "days")
                   .format("D")}
+                <ShowEvents
+                  date1={moment(startDate)
+                    .add(7 * week + day, "days")
+                    .format("YYYY-MM-DD")}
+                  events={this.state.events}
+                />
               </div>
             ))}
           </div>
@@ -101,3 +120,17 @@ class Dates extends Component {
   }
 }
 export default Dates;
+
+const ShowEvents = ({ date1, events }) => {
+  const showEvents = events.filter((e) => {
+    return e.date === date1;
+  });
+
+  if (showEvents.length === 0) return null;
+  else
+    return showEvents.map((event) => (
+      <p className="calendar-event">
+        <b>{event.time}</b> {event.title}
+      </p>
+    ));
+};

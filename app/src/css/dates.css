@@ -28,6 +28,7 @@
   cursor: pointer;
   border: 1px solid black;
   user-select: none;
+  overflow: hidden;
 }
 .date:hover {
   background-color: #dddddd;
@@ -52,4 +53,11 @@
 }
 .date-different-month:active {
   background: rgb(95, 95, 95);
+}
+
+.calendar-event {
+  font-size: 45%;
+  padding-left: 3%;
+  margin: 0;
+  word-break: break-all;
 }

@@ -25,4 +25,5 @@ const remove = (id) => {
     return axios.delete(`${url}/${id}`);
 };
 
-export default { getAll, getByDate, create, update, remove };
+const EventService = { getAll, getByDate, create, update, remove };
+export default EventService;

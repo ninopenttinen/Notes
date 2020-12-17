@@ -13,19 +13,88 @@
   cursor: pointer;
 }
 
-#event {
+#event-container {
   z-index: 3;
   display: inline-block;
   position: absolute;
   overflow: auto;
   top: 20%;
-  bottom: 20%;
-  left: 20%;
-  right: 20%;
-  padding: 0.1%;
-  background-color: white;
+  bottom: 30%;
+  left: 35%;
+  right: 35%;
+  padding: 2%;
+  font-size: 90%;
   border: 1px solid rgb(40, 40, 40);
-  border-radius: 10px;
+  border-radius: 2px;
   box-shadow: 0 5px 5px -1px rgba(0, 0, 0, 0.4);
+  background-color: white;
   cursor: default !important;
+}
+
+/*EventList style*/
+#event-list {
+  border-bottom: 1px solid black;
+  margin-bottom: 2%;
+  box-shadow: 0 5px 5px -5px rgba(0, 0, 0, 0.233);
+}
+#event {
+  font-family: Helvetica-Neue-Light !important;
+  letter-spacing: 0.5px;
+}
+
+/*EventForm style*/
+#event-form {
+  width: 100%;
+}
+.form-input-text {
+  width: 100%;
+  margin: 0;
+  display: flex;
+  align-items: center; /*vertical align*/
+  font-family: Helvetica-Neue-Light;
+  font-weight: bold;
+  letter-spacing: 0.5px;
+}
+
+.form-input-text > label {
+  width: 40%;
+  max-width: 120px;
+  overflow: hidden;
+}
+.form-input-checkbox {
+  margin-top: 2%;
+  width: 100%;
+  display: flex;
+  align-items: center; /*vertical align*/
+  font-family: Helvetica-Neue-Light;
+  letter-spacing: 0.5px;
+}
+.form-input-checkbox > label {
+  font-size: 80%;
+  overflow: hidden;
+}
+
+#form-title,
+#form-description,
+#form-time {
+  width: 100%;
+  margin-left: 1%;
+  border: none;
+  border-bottom: 1px solid rgb(0, 0, 0);
+  border-radius: 0;
+  font-size: 100%;
+  overflow: hidden;
+  outline: none;
+  font-family: Helvetica-Neue-Light;
+  font-weight: bold;
+  letter-spacing: 0.5px;
+  background-color: rgba(255, 255, 255, 0);
+}
+#form-title:hover,
+#form-title:focus,
+#form-description:hover,
+#form-time:focus,
+#form-description:hover,
+#form-time:focus {
+  border-bottom: 2px solid rgb(0, 0, 0);
 }

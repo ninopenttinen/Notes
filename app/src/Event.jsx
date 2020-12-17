@@ -5,19 +5,37 @@ import moment from "moment";
 // This component handles the form for creating new events for a specific day selected in the calendar
 const EventForm = (props) => {
   return (
-    <form onSubmit={props.addEvent}>
-      <div>
-        Title:
-        <input value={props.title} onChange={props.htc} required />
+    <form id="event-form" onSubmit={props.addEvent}>
+      <div className="form-input-text">
+        <label htmlFor="form-title">Title&nbsp;</label>
+        <input
+          id="form-title"
+          value={props.title}
+          onChange={props.htc}
+          required
+        />
+      </div>
+      <div className="form-input-text">
+        <label htmlFor="form-description">Description&nbsp;</label>
+        <input id="form-description" value={props.event} onChange={props.hec} />
+      </div>
+      <div className="form-input-text">
+        <label htmlFor="form-time">Time&nbsp;</label>
+        <input id="form-time" value={props.time} onChange={props.hdc} />
+      </div>
+      <div className="form-input-checkbox">
+        <label htmlFor="form-importance">Important&nbsp;</label>
+        <input
+          id="form-importance"
+          type="checkbox"
+          value={props.importance}
+          onChange={props.hic}
+        />
       </div>
       <div>
-        Description: <input value={props.event} onChange={props.hec} />
-      </div>
-      <div>
-        Time: <input value={props.time} onChange={props.hdc} />
-      </div>
-      <div>
-        <button type="submit">save</button>
+        <button id="submit-button" type="submit">
+          save
+        </button>
       </div>
     </form>
   );
@@ -26,19 +44,19 @@ const EventForm = (props) => {
 // This component handles listing all the events for the selected date in the calendar
 const EventList = (props) => {
   return (
-    <div>
-      {moment(props.currentDate).format("LL")}
+    <div id="event-list">
+      <b>{moment(props.currentDate).format("LL")}</b>
       {props.events.map((event) =>
         moment(event.date).format("YYYY-MM-DD") === props.currentDate ? (
-          <div>
+          <div className="event">
             <p key={event.id}>
-              Title: {event.title} <br />
-              Description: {event.description} <br />
-              Time: {event.time} <br />
+              <b>{event.time}</b>&nbsp;
+              {event.title} <br />
               <button onClick={props.removeEvent} value={event.id}>
                 delete
               </button>
             </p>
+            {event.description} <br />
           </div>
         ) : null
       )}
@@ -52,6 +70,7 @@ const Event = (props) => {
   const [newTitle, setNewTitle] = useState("");
   const [newEvent, setNewEvent] = useState("");
   const [newTime, setNewTime] = useState("");
+  const [newImportance, setNewImportance] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
   const handleTitleChange = (event) => {
     setNewTitle(event.target.value);
@@ -62,6 +81,11 @@ const Event = (props) => {
 
   const handleTimeChange = (event) => {
     setNewTime(event.target.value);
+  };
+
+  const handleImportanceChange = (event) => {
+    setNewImportance(event.target.checked);
+    console.log(event.target.checked);
   };
 
   // React effects and hooks are used to fetch data with axios from the JSON-server
@@ -83,8 +107,9 @@ const Event = (props) => {
     const EventObject = {
       title: newTitle,
       description: newEvent,
-      date: moment(props.date).format("LL"),
+      date: moment(props.date).format("YYYY-MM-DD"),
       time: newTime,
+      importance: newImportance,
       id: "",
     };
 
@@ -109,7 +134,7 @@ const Event = (props) => {
   // Here we render everything that would be displayed inside the modal that pops up when a date is clicked in the calendar
   return (
     <div
-      id="event"
+      id="event-container"
       onClick={(e) => {
         e?.stopPropagation();
       }}
@@ -124,10 +149,12 @@ const Event = (props) => {
         description={newEvent}
         date={props.date}
         time={newTime}
+        importance={newImportance}
         addEvent={addEvent}
         htc={handleTitleChange}
         hec={handleEventChange}
         hdc={handleTimeChange}
+        hic={handleImportanceChange}
       />
     </div>
   );

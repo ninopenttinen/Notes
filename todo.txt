@@ -1,0 +1,7 @@
+- dropdown menu
+- eventtien muokkaus
+- eventtien näyttäminen kalenterissa
+- eventtien muotoilu
+- eventtien automaattinen poistuminen ja lisääntyminen
+- eventeille väri?
+- kuvan lisääminen

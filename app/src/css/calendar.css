@@ -3,7 +3,7 @@
   height: 100%;
   width: 100%;
   display: grid;
-  grid-template-rows: 30% 5% 65%;
+  grid-template-rows: 4% 25% 5% 66%;
   overflow: auto;
   box-shadow: 0 0 5px rgba(0, 0, 0, 0.233);
 }
@@ -19,6 +19,27 @@ header {
   display: flex;
   justify-content: space-between; /*horizontal align*/
   align-items: center; /*vertical align*/
+}
+
+#clock {
+  padding-left: 0.5%;
+  font-family: Helvetica-Neue-Light;
+}
+
+#image-container {
+  z-index: -2;
+  padding: 0;
+  margin: 0;
+  margin-left: 2%;
+  margin-right: 2%;
+  border-bottom: 1px solid rgb(56, 56, 56);
+  overflow: hidden;
+}
+
+img {
+  z-index: -2;
+  max-width: 100%;
+  overflow: hidden;
 }
 
 #month {
@@ -54,10 +75,4 @@ button {
 #today {
   margin-left: 50%;
   position: absolute;
-}
-#previous-month {
-  /*float: left;*/
-}
-#next-month {
-  /*float: right;*/
 }

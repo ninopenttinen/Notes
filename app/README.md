@@ -11,9 +11,9 @@ This simple browser-based calendar allows you to create, modify and delete user 
 
 # Installation and usage
 
-To install the dependencies, execute the "npm install" command at the root of the project folder. This should install everything necessary to run the application.
+To install the dependencies, execute either "npm install" or "yarn install" command at the root of the project folder. This should install everything necessary to run the application.
 
-To run, execute the "npm start" command in a terminal at the root of the project folder. After the application has successfully launched, start the json-server in another terminal with the "npx json-server --watch db.json --routes routes.json -p 5000" command. This will launch the simple json-server, set it to watch db.json at the root folder, set custom routes from routes.json also at the root folder (work in progress) and configure the server to run at port 5000 to not overlap with the application.
+To run, execute the "npm/yarn start" command in a terminal at the root of the project folder. After the application has successfully launched, start the json-server in another terminal with the "npx json-server --watch db.json --routes routes.json -p 5000" command. This will launch the simple json-server, set it to watch db.json at the root folder, set custom routes from routes.json also at the root folder (work in progress) and configure the server to run at port 5000 to not overlap with the application.
 
 # Uninstallation
 

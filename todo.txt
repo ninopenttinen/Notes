@@ -1,8 +1,0 @@
-- eventtien muokkaus?
-- important eventit päällimmäisiks, ja ajan eteen "!" tai fonttii isommaks tms.
-    -> ja muuten eventit aikajärjestykseen (vaatii syötteen tarkastuksen)
-- performance optimointia
-    -> vaihda Events React luokaksi
-- loput kuvat
-- ääkköset ja öökköset ei toimi
-- mongodb servu?

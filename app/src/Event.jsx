@@ -67,7 +67,7 @@ const EventList = (props) => {
                 )}
                 {event.title}
               </p>
-              <button value={event.id} onClick={(e) => props.removeEvent(e)}>
+              <button value={event.id} onClick={props.removeEvent}>
                 <IoCloseOutline size={18} />
               </button>
             </span>
@@ -145,6 +145,7 @@ const Event = (props) => {
 
   // This function handles removing an existing event from the json-server
   const removeEvent = (event) => {
+    console.log(event.currentTarget.value);
     EventService.remove(event.currentTarget.value)
       .then(() => {
         props.updateComponent();

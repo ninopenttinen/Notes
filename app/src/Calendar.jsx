@@ -103,11 +103,7 @@ class Calendar extends Component {
 }
 
 export default Calendar;
-/*
-<button id="today" onClick={() => this.handleClick("today")}>
-TODAY
-</button>
-*/
+
 const MonthImage = ({ month }) => {
   switch (month) {
     case "01":

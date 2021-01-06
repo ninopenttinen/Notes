@@ -1,2 +1,0 @@
-npm start
-npx json-server --watch events.json -p 5000

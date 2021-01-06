@@ -3,8 +3,7 @@ import { IoArrowBackOutline, IoArrowForwardOutline } from "react-icons/io5";
 import Dates from "./Dates";
 import DropdownMenu from "./DropdownMenu";
 import moment from "moment";
-import ImageJanuary from "./images/January.jpg";
-import ImageDecember from "./images/December.jpg";
+import images from "./images/images.js";
 
 class Calendar extends Component {
   state = {
@@ -107,10 +106,10 @@ export default Calendar;
 const MonthImage = ({ month }) => {
   switch (month) {
     case "01":
-      return <img src={ImageJanuary} alt="Image of the month" />;
-    /*case "02":
-      return <img src={ImageFebruary} alt="Image of the month" />;
-    case "03":
+      return <img src={images.January} alt="Image of the month" />;
+    case "02":
+      return <img src={images.February} alt="Image of the month" />;
+    /*case "03":
       return <img src={ImageMarch} alt="Image of the month" />;
     case "04":
       return <img src={ImageApril} alt="Image of the month" />;
@@ -129,7 +128,7 @@ const MonthImage = ({ month }) => {
     case "11":
       return <img src={ImageNovember} alt="Image of the month" />;*/
     case "12":
-      return <img src={ImageDecember} alt="Image of the month" />;
+      return <img src={images.December} alt="Image of the month" />;
     default:
       return null;
   }

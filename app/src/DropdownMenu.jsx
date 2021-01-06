@@ -11,15 +11,6 @@ export default class DropdownMenu extends Component {
     };
   }
 
-  //action = enter/leave
-  handleHovering = (action) => {
-    if (action === "enter") {
-      this.setState({ show: true });
-    } else {
-      this.setState({ show: true });
-    }
-  };
-
   render() {
     const reformatIndex = [
       "01",
@@ -39,11 +30,7 @@ export default class DropdownMenu extends Component {
     console.log("rendered DropdownMenu");
 
     return (
-      <div
-        id="dropdown"
-        onMouseEnter={(e) => this.handleHovering("enter", e)}
-        onMouseLeave={(e) => this.handleHovering("leave", e)}
-      >
+      <div id="dropdown">
         <IoIosMenu size={35} color={"#646464"} />
         {this.state.show ? (
           <div className="dropdown-content" title="Months">

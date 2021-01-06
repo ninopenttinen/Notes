@@ -7,12 +7,12 @@
 
 .weekdays {
   display: grid;
-  grid-template-rows: 0.1fr 0.15fr 0.15fr 0.15fr 0.15fr 0.15fr 0.15fr;
+  grid-template-rows: 0.07fr 0.15fr 0.15fr 0.15fr 0.15fr 0.15fr 0.15fr;
 }
 
 .day-names {
   font-size: 100%;
-  /*letter-spacing: 0.5px;*/
+  letter-spacing: 0.5px;
   display: flex;
   justify-content: center; /*horizontal align*/
   align-items: center; /*vertical align*/

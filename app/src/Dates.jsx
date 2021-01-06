@@ -1,6 +1,6 @@
 import React, { Component } from "react";
-import EventService from "./EventService";
-import Event from "./Event";
+import Events from "./Events";
+import eventService from "./eventService";
 import moment from "moment";
 
 class Dates extends Component {
@@ -12,7 +12,8 @@ class Dates extends Component {
   };
 
   componentDidMount = () => {
-    EventService.getAll()
+    eventService
+      .getAll()
       .then((res) => {
         if (res.status === 200) {
           this.setState({ events: res.data });
@@ -24,7 +25,8 @@ class Dates extends Component {
   };
 
   reloadEvents = () => {
-    EventService.getAll()
+    eventService
+      .getAll()
       .then((res) => {
         if (res.status === 200) {
           this.setState({ events: res.data });
@@ -122,7 +124,8 @@ class Dates extends Component {
         ))}
         {this.state.writingNote ? (
           <div id="event-background" onClick={this.closeEvent}>
-            <Event
+            <Events
+              events={this.state.events}
               updateComponent={this.reloadEvents}
               date={this.state.selectedDate}
             />

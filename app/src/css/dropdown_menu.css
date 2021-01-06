@@ -1,6 +1,4 @@
 #dropdown {
-  height: 100%;
-  padding-bottom: 0.5%;
   background-color: #ffffff00;
   color: rgb(0, 0, 0);
   border: none;
@@ -22,9 +20,9 @@
   left: auto;
   right: 0;
   display: none;
+  overflow: auto;
   min-width: 115px;
   max-height: 230px;
-  overflow: auto;
   border-bottom-left-radius: 2px;
   border-bottom-right-radius: 2px;
   position: absolute;
